@@ -54,6 +54,15 @@ class IPAddress:
             else:
                 raise Exception(f"Invalid count of symbols in {cnt + 1} octet")
 
+    def get_binary_represent(self):
+        return "".join(f"{i:>08b}" for i in self.decimal_octets)
+
+    def get_prefix(self):
+        return self.prefix
+
+    def get_mask(self):
+        return self.mask
+
     def __str__(self):
         return ".".join(str(i) for i in self.decimal_octets)
 
@@ -62,7 +71,7 @@ class IPAddress:
         binary = "Binary representation: " + ".".join(f"{i:>08b}" for i in self.decimal_octets)
         return dec + '\n' + binary
 
-    def find_class(self) -> str:
+    def determine_class(self) -> str:
         if f"{self.decimal_octets[0]:08b}"[0] == '0':
             return 'A'
 
@@ -86,9 +95,9 @@ class IPAddress:
             'D': ['224.0.0.0', '239.255.255.255'],
             'E': ['240.0.0.0', '255.255.255.255']
         }
-        return network_classes[self.find_class()][0], network_classes[self.find_class()][1]
+        return network_classes[self.determine_class()][0], network_classes[self.determine_class()][1]
 
-    def find_mask(self):
+    def get_mask_by_class(self):
         mask_classes = {
             'A': '255.0.0.0',
             'B': '255.255.0.0',
@@ -96,4 +105,5 @@ class IPAddress:
             'D': 'No mask, this IP address is using for group mailing',
             'E': 'No mask, this IP address is Reserved'
         }
-        return mask_classes[self.find_class()]
+        self.prefix = 8 * mask_classes[self.determine_class()].count('255')
+        return mask_classes[self.determine_class()]
