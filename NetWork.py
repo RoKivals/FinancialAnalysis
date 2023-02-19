@@ -19,6 +19,7 @@ class NetWork:
     def count_subnets(self):
         return 2 ** self.brought_bits
 
+    # find required mask for subnet
     def find_required_subnet(self, req_subnets, req_hosts):
         if req_hosts > self.count_hosts():
             raise Exception('It\'s impossible to make so many hosts')
@@ -44,12 +45,48 @@ class NetWork:
 
     def find_start(self):
         s = self.net_address.get_binary_represent()
-        s = '.'.join(i for i in s[::8])
         return s
 
     def find_end(self):
         s = self.net_address.get_binary_represent()
         s = s[:self.net_address.prefix]
         s = s + "".join('1' * (32 - self.net_address.prefix))
-        s = '.'.join(f'{int(i, 2)}' for i in s[::8])
         return s
+
+    def first_five_addresses(self):
+        d = 5
+        subnet = 0
+        address = 1
+        s = self.find_start()
+        s_fixed = s[:self.net_address.prefix]
+        s_mutable = s[self.net_address.prefix:]
+        while d > 0:
+            if address > self.count_addresses():
+                address = 0
+                subnet += 1
+            s_mutable = f'{subnet:0{self.brought_bits}b}{address:0{32 - self.net_address.prefix - self.brought_bits}b}'
+            address += 1
+            if s_fixed + s_mutable != s:
+                d -= 1
+                print(s_fixed + s_mutable)
+
+    def last_five_addresses(self):
+        d = 5
+        subnet = self.count_subnets()
+        address = self.count_addresses()
+        s = self.find_end()
+        s_fixed = s[:self.net_address.prefix]
+        s_mutable = s[self.net_address.prefix:]
+        while d > 0:
+            if address < 0:
+                address = self.count_addresses()
+                subnet -= 1
+            s_mutable = f'{subnet:0{self.brought_bits}b}{address:0{32 - self.net_address.prefix - self.brought_bits}b}'
+            address -= 1
+            if s_fixed + s_mutable != s:
+                d -= 1
+                print(s_fixed + s_mutable)
+
+
+def insert_dots(s: str):
+    return f'{s[:8]}.{s[8:16]}.{s[16:24]}.{s[24:32]}'
