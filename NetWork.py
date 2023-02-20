@@ -23,10 +23,16 @@ class NetWork:
     def find_required_subnet(self, req_subnets, req_hosts):
         if req_hosts > self.count_hosts():
             raise Exception('It\'s impossible to make so many hosts')
-        while self.count_subnets() < req_subnets and self.count_hosts() * self.count_subnets() > req_hosts:
+        while self.count_subnets() < req_subnets and self.count_hosts() > req_hosts:
             self.brought_bits += 1
-        while self.count_hosts() * self.count_subnets() > req_hosts:
+        while self.count_hosts() > req_hosts:
             self.brought_bits += 1
+        else:
+            self.brought_bits -= 1
+
+    def get_mask(self):
+        return '1' * (self.net_address.get_prefix() + self.brought_bits) + '0' * (
+                    32 - self.net_address.get_prefix() + self.brought_bits)
 
     def find_subnet_class(self) -> str:
         # C - class of subnets
