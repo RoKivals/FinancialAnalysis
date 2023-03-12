@@ -1,4 +1,4 @@
-from Point import *
+from Classes.Geometry.Point import *
 
 
 class Rect:
