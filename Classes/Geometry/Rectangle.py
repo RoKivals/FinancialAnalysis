@@ -6,11 +6,13 @@ class Rect:
         self.first = first
         self.second = second
 
+    # string representation
     def __str__(self):
         res = f"Прямоугольник с вершинами:\nЛевая верхняя: x={self.first.x} y={self.first.y}" \
               f"\nПравая нижняя: x={self.second.x} y={self.second.y}"
         return res
 
+    # length of sides
     def sides(self):
         side1 = abs(self.first.x - self.second.x)
         side2 = abs(self.first.y - self.second.y)
