@@ -135,6 +135,10 @@ cover/
 *.mo
 *.pot
 
+# Data files
+*.pickle
+*.json
+
 # Django stuff:
 *.log
 local_settings.py
