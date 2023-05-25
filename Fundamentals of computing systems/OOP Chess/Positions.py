@@ -54,5 +54,6 @@ class PositionTest(unittest.TestCase):
         except ValueError:
             print('Выход за пределы поля')
 
+
 if __name__ == '__main__':
     unittest.main()

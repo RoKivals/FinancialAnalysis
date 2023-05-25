@@ -20,5 +20,5 @@ class Pawn(Figure):
     def __init__(self, color: str, pos: Position):
         super().__init__(color, pos)
 
-    def is_valid_move(self):
+    def is_valid_move(self, move: Position):
         pass
