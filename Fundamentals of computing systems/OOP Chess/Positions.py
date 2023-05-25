@@ -3,8 +3,15 @@ import unittest
 
 class Position:
     def __init__(self, column: str, row: str):
-        self._column = column
-        self._row = row
+        if 'a' <= column.lower() <= 'h':
+            self._column = column
+        else:
+            raise ValueError("Фигура может находиться только в столбце от A до H")
+
+        if 1 <= int(row) <= 8:
+            self._row = row
+        else:
+            raise ValueError("Фигура может находиться только в строке от 1 до 8")
 
     @property
     def row(self):
@@ -34,14 +41,18 @@ class Position:
 
 class PositionTest(unittest.TestCase):
     def test_map_calculating_road_angle(self):
-        test_map = Position('a', '8')
-        test_map2 = Position('h', '4')
+        test_pos = Position('a', '8')
+        test_pos2 = Position('h', '4')
+        test_pos4 = Position('A', '1')
 
-        test_map3 = Position('m', '9')
+        self.assertEqual(test_pos.__str__(), 'A8')
+        self.assertEqual(test_pos2.__str__(), 'H4')
+        self.assertEqual(test_pos4.__str__(), 'A1')
 
-        self.assertEqual(test_map.__str__(), 'A8')
-        self.assertEqual(test_map3.__str__(), None)
-
+        try:
+            test_pos3 = Position('M', '9')
+        except ValueError:
+            print('Выход за пределы поля')
 
 if __name__ == '__main__':
     unittest.main()
