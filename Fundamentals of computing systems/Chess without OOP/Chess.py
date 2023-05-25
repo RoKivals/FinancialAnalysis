@@ -1,10 +1,14 @@
-class Figure:
-    pass
+letters = 'ABCDEFGH'
+digits = [i for i in range(1, 9)]
 
+
+def fill_field_by_default(field: set):
+    for col in letters:
+        field[f'{col}2'] = 'Pawn'
+        field[f'{col}7'] = 'Pawn'
+    
 
 def create_field():
-    letters = 'ABCDEFGH'
-    digits = [i for i in range(1, 9)]
     field = set()
     for col in letters:
         for row in digits:
