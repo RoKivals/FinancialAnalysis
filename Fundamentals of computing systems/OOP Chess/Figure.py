@@ -16,6 +16,9 @@ class Figure:
     def change_position(self, new_pos: Position):
         self._position = new_pos
 
+    def all_possible_moves(self):
+        pass
+
 
 class Pawn(Figure):
     def __init__(self, color: str, pos: Position):
@@ -39,6 +42,15 @@ class Pawn(Figure):
             if move.column == self._position.column and move.row - self._position.row in [-1, -2]:
                 return True
         return False
+
+    def all_possible_moves(self) -> list:
+        moves = []
+        for row in [str(i) for i in range(1, 9)]:
+            for column in "ABCDEFGH":
+                new_pos = Position(column, row)
+                if self.is_valid_move(new_pos):
+                    moves.append(new_pos)
+        return moves
 
 
 class Knight(Figure):
