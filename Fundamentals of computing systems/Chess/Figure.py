@@ -17,7 +17,13 @@ class Figure:
         self._position = new_pos
 
     def all_possible_moves(self):
-        pass
+        moves = []
+        for row in [str(i) for i in range(1, 9)]:
+            for column in "ABCDEFGH":
+                new_pos = Position(column, row)
+                if self.is_valid_move(new_pos):
+                    moves.append(new_pos)
+        return moves
 
 
 class Pawn(Figure):
@@ -42,15 +48,6 @@ class Pawn(Figure):
             if move.column == self._position.column and move.row - self._position.row in [-1, -2]:
                 return True
         return False
-
-    def all_possible_moves(self) -> list:
-        moves = []
-        for row in [str(i) for i in range(1, 9)]:
-            for column in "ABCDEFGH":
-                new_pos = Position(column, row)
-                if self.is_valid_move(new_pos):
-                    moves.append(new_pos)
-        return moves
 
 
 class Knight(Figure):
@@ -113,9 +110,10 @@ class Queen(Figure):
 class FigureMovementTest(unittest.TestCase):
     def test_map_calculating_road_angle(self):
         Pawn1 = Pawn('b', Position('a', '5'))
-        Pawn2 = Pawn('w', Position('h', '6'))
+        Knight1 = Knight('b', Position('b', '5'))
+        Bishop1 = Bishop('w', Position('c', '1'))
 
-        self.assertEqual(Pawn1.is_valid_move(Position('a', '6')), True)
+        self.assertEqual(Pawn1.is_valid_move(Position('a', '6')), False)
 
 
 if __name__ == '__main__':

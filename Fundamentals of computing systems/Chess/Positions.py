@@ -3,8 +3,8 @@ import unittest
 
 class Position:
     def __init__(self, column: str, row: str):
-        if 'a' <= column.lower() <= 'h':
-            self._column = column
+        if 'A' <= column.upper() <= 'H':
+            self._column = column.upper()
         else:
             raise ValueError("Фигура может находиться только в столбце от A до H")
 
@@ -15,7 +15,7 @@ class Position:
 
     @property
     def row(self):
-        return self._row
+        return int(self._row)
 
     @row.setter
     def row(self, value: str):
@@ -26,12 +26,12 @@ class Position:
 
     @property
     def column(self):
-        return self._column
+        return ord(self._column)
 
     @column.setter
     def column(self, value: str):
-        if 'a' <= value.lower() <= 'h':
-            self._column = value
+        if 'A' <= value.upper() <= 'H':
+            self._column = value.upper()
         else:
             raise ValueError("Фигура может попасть только в клетку с столбцом от A до H")
 
