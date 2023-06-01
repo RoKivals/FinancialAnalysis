@@ -230,16 +230,16 @@ def tr_homothety(array: list, corner=0, index=0):
 
     return array + array_neg
 
-# visualization(-15, 15, gen_rectangle(10))
-# visualization(-15, 15, gen_triangle(10))
-# visualization(-15, 15, gen_hexagon(10))
-# visualization(0, 30, generate_figures())
-# visualization(-15, 15,tr_translate(gen_rectangle(10), y=5))
-# visualization(-15, 15, tr_rotate(gen_rectangle(10), 2))
-# visualization(-15, 15, tr_symmetry(gen_triangle(10), 2), gen_triangle(10))
-# visualization(-15, 15, tr_homothety(gen_rectangle(10), 3, 2))
-# visualization(-15, 15, tr_rotate(tr_translate(gen_rectangle(10), y=3), 1), tr_rotate(gen_rectangle(10), 1),\
-#              tr_rotate(tr_translate(gen_rectangle(10), y=-3), 1))
-# visualization(-15, 15, tr_rotate(tr_translate(gen_rectangle(10), y=4), -1), tr_rotate(gen_rectangle(10), 1))
-# visualization(-15, 15, tr_symmetry(gen_triangle(10), 3), gen_triangle(10))
-# visualization(-15, 15, tr_homothety(gen_rectangle(10), 2, 1))
+visualization(-15, 15, gen_rectangle(10))
+visualization(-15, 15, gen_triangle(10))
+visualization(-15, 15, gen_hexagon(10))
+visualization(0, 30, generate_figures())
+visualization(-15, 15,tr_translate(gen_rectangle(10), y=5))
+visualization(-15, 15, tr_rotate(gen_rectangle(10), 2))
+visualization(-15, 15, tr_symmetry(gen_triangle(10), 2), gen_triangle(10))
+visualization(-15, 15, tr_homothety(gen_rectangle(10), 3, 2))
+visualization(-15, 15, tr_rotate(tr_translate(gen_rectangle(10), y=3), 1), tr_rotate(gen_rectangle(10), 1),\
+             tr_rotate(tr_translate(gen_rectangle(10), y=-3), 1))
+visualization(-15, 15, tr_rotate(tr_translate(gen_rectangle(10), y=4), -1), tr_rotate(gen_rectangle(10), 1))
+visualization(-15, 15, tr_symmetry(gen_triangle(10), 3), gen_triangle(10))
+visualization(-15, 15, tr_homothety(gen_rectangle(10), 2, 1))
