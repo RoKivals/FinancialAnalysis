@@ -109,6 +109,13 @@ class HashTable:
                 min_len = min(min_len, length)
         return min_len
 
+    def fill_factor(self):
+        empty = 0
+        for elem in self.table:
+            if elem is None:
+                empty += 1
+        return (self.size - empty) / self.size
+
     def __len__(self):
         return self.size
 
@@ -142,8 +149,8 @@ def main():
 
     print(table.shortest_chain())
     print(table.longest_chain())
+    print(table.fill_factor())
 
 
-# Driver code
 if __name__ == '__main__':
     main()
