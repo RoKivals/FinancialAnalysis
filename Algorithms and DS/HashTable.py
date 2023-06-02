@@ -1,3 +1,5 @@
+import string
+import random
 from typing import List, Tuple, Union
 
 
@@ -96,7 +98,7 @@ class HashTable:
         return max_len
 
     def shortest_chain(self):
-        max_len = self.size
+        min_len = self.size
         for elem in self.table:
             if elem is not None:
                 length = 1
@@ -104,8 +106,8 @@ class HashTable:
                 while current.next:
                     length += 1
                     current = current.next
-                max_len = max(max_len, length)
-        return max_len
+                min_len = min(min_len, length)
+        return min_len
 
     def __len__(self):
         return self.size
@@ -118,34 +120,30 @@ class HashTable:
             return False
 
 
+def generate_random_string(length: int):
+    letters = string.ascii_letters
+    rand_string = ''.join(random.choice(letters) for i in range(length))
+    return rand_string
+
+
 def main():
-    pass
+    table = HashTable()
+    # Генерация строк
+    for i in range(500):
+        key = random.randrange(50000)
+        val = generate_random_string(key % 25)
+        table.insert(key, val)
+
+    # Генерация чисел
+    for i in range(500):
+        key = random.randrange(50000)
+        val = random.randrange(50000)
+        table.insert(key, val)
+
+    print(table.shortest_chain())
+    print(table.longest_chain())
 
 
 # Driver code
 if __name__ == '__main__':
-    # Create a hash table with
-    # a capacity of 5
-    ht = HashTable(5)
-
-    # Add some key-value pairs
-    # to the hash table
-    ht.insert("apple", 3)
-    ht.insert("banana", 2)
-    ht.insert("cherry", 5)
-
-    # Check if the hash table
-    # contains a key
-    print("apple" in ht)  # True
-    print("durian" in ht)  # False
-
-    # Get the value for a key
-    print(ht.search("banana"))  # 2
-
-    # Update the value for a key
-    ht.insert("banana", 4)
-    print(ht.search("banana"))  # 4
-
-    ht.remove("apple")
-    # Check the size of the hash table
-    print(len(ht))  # 3
+    main()
